@@ -1,32 +1,49 @@
 import { useState } from "react";
-import { Header, Footer } from "./components";
+import { Modal, TodoList, TodoListCategory } from "./components";
+import { categories } from "./core/category";
+import { tasks } from "./mock/tasks";
 
 export default function App() {
-  const [name, setName] = useState("Pepe Zapata");
+  const [currentCategory, setCurrentCategory] = useState(null);
 
-  const handleButtonClick = () => {
-    setName("Juan Perez");
-    console.log("Hola soy una funcion");
-  };
-
-  const grettins = (name, lastname) => {
-    // tempalte string `Hola ${name}`
-    // `` : backticks
-    console.log(`Hola me llamo ${name} ${lastname}`);
-  };
+  const [open, setOpen] = useState(false);
 
   return (
-    <>
-      <Header
-        title="Haciendo una web en react"
-        text="Este es un esto para el header"
-      />
-      <h1>Mi primer componente {name}</h1>
-      <button onClick={handleButtonClick}>Cambiar nombre</button>
-      <button onClick={() => grettins("Pepe", "Zapata")}>
-        Funcion con parametros
+    <div className="p-6">
+      <h1 className="text-2xl">Manage your time well</h1>
+      <div className="my-6">
+        <h2 className="font-semibold">Categories {currentCategory}</h2>
+        <div className="flex mt-3 justify-between">
+          {categories.map((category) => (
+            <TodoListCategory
+              key={category.text}
+              icon={category.icon}
+              text={category.text}
+              setCurrentCategory={setCurrentCategory}
+              currentCategory={currentCategory}
+            />
+          ))}
+        </div>
+      </div>
+      <div className="flex justify-between">
+        <h2 className="font-semibold">You have 10 task for today</h2>
+        <button
+          onClick={() => setCurrentCategory(null)}
+          className="text-sm text-blue-500"
+        >
+          Clear filter
+        </button>
+      </div>
+      <TodoList tasks={tasks} category={currentCategory} />
+      <Modal open={open} onClose={() => setOpen(!open)}>
+        <h1>Es un modal</h1>
+      </Modal>
+      <button
+        onClick={() => setOpen(!open)}
+        className="fixed bottom-10 right-10 bg-blue-500 text-white p-2 rounded-full w-12 h-12 text-2xl"
+      >
+        +
       </button>
-      <Footer />
-    </>
+    </div>
   );
 }
