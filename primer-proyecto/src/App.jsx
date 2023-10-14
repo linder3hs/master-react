@@ -1,10 +1,20 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { CreateTask, TodoList, TodoListCategory } from "./components";
 import { categories } from "./core/category";
 import { tasks } from "./mock/tasks";
+import { read } from "./services";
 
 export default function App() {
   const [currentCategory, setCurrentCategory] = useState(null);
+
+  const getTasks = async () => {
+    const data = await read();
+    console.log(data);
+  };
+
+  useEffect(() => {
+    getTasks();
+  }, []);
 
   return (
     <div className="p-6">
