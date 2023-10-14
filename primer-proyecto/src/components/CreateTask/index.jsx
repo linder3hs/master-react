@@ -1,6 +1,5 @@
 import { useState } from "react";
-import { Modal } from "../../components";
-import { Listbox } from "@headlessui/react";
+import { Modal, Select } from "../../components";
 import { categories } from "../../core/category";
 
 export default function CreateTask() {
@@ -12,6 +11,24 @@ export default function CreateTask() {
     select: listCategories[0],
     current: null,
   });
+
+  const handleChangeList = (e) => {
+    setSelectCategory({
+      select: e,
+      current: e,
+    });
+
+    const items = listCategories.filter((category) => category.text !== e.text);
+
+    setListCategories([{ ...e }, ...items]);
+  };
+
+  const handleMouse = (category) => {
+    setSelectCategory({
+      ...selectCategory,
+      current: category,
+    });
+  };
 
   return (
     <>
@@ -27,49 +44,12 @@ export default function CreateTask() {
               />
             </div>
             <div className="mt-5">
-              <Listbox
+              <Select
                 value={selectCategory}
-                onChange={(e) => {
-                  setSelectCategory({
-                    select: e,
-                    current: e,
-                  });
-
-                  const items = categories.filter(
-                    (category) => category.text !== e.text
-                  );
-
-                  setListCategories([{ ...e }, ...items]);
-                }}
-              >
-                <div className="relative">
-                  <Listbox.Button className="w-full flex gap-2 py-3 px-2 rounded border">
-                    <img src={selectCategory.select.icon} />{" "}
-                    {selectCategory.select.text}
-                  </Listbox.Button>
-                  <Listbox.Options className="absolute z-10 w-full bg-white mt-1 rounded shadow">
-                    {listCategories.map((category) => (
-                      <Listbox.Option
-                        key={category.text}
-                        value={category}
-                        onMouseEnter={() =>
-                          setSelectCategory({
-                            ...selectCategory,
-                            current: category,
-                          })
-                        }
-                        className={`${
-                          selectCategory.current?.text === category.text
-                            ? "bg-blue-200 text-white"
-                            : "bg-white"
-                        } py-3 flex gap-2 items-center cursor-pointer px-2 first:rounded-t last:rounded-b`}
-                      >
-                        <img src={category.icon} /> {category.text}
-                      </Listbox.Option>
-                    ))}
-                  </Listbox.Options>
-                </div>
-              </Listbox>
+                onChange={handleChangeList}
+                onMouseEnter={handleMouse}
+                listItems={listCategories}
+              />
             </div>
           </div>
         </form>
