@@ -21,16 +21,28 @@ export default function CreateTask() {
                 className="w-full border px-2 py-3 rounded outline-none"
               />
             </div>
-            <div>
+            <div className="mt-5">
               <Listbox value={selectCategory} onChange={setSelectCategory}>
-                <Listbox.Button>{selectCategory.text}</Listbox.Button>
-                <Listbox.Options>
-                  {categories.map((category) => (
-                    <Listbox.Option key={category.text} value={category.text}>
-                      <img src={category.icon} /> {category.text}
-                    </Listbox.Option>
-                  ))}
-                </Listbox.Options>
+                <div className="relative">
+                  <Listbox.Button className="w-full flex gap-2 py-3 px-2 rounded border">
+                    <img src={selectCategory.icon} /> {selectCategory.text}
+                  </Listbox.Button>
+                  <Listbox.Options className="absolute z-10 w-full bg-white mt-1 rounded shadow">
+                    {categories.map((category) => (
+                      <Listbox.Option
+                        key={category.text}
+                        value={category}
+                        className={`${
+                          selectCategory.text === category.text
+                            ? "bg-blue-200 text-white"
+                            : "bg-white"
+                        } py-3 flex gap-2 items-center cursor-pointer px-2 hover:bg-blue-200 hover:text-white first:rounded-t last:rounded-b`}
+                      >
+                        <img src={category.icon} /> {category.text}
+                      </Listbox.Option>
+                    ))}
+                  </Listbox.Options>
+                </div>
               </Listbox>
             </div>
           </div>
