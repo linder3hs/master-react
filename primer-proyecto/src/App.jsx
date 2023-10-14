@@ -1,12 +1,10 @@
 import { useState } from "react";
-import { Modal, TodoList, TodoListCategory } from "./components";
+import { CreateTask, TodoList, TodoListCategory } from "./components";
 import { categories } from "./core/category";
 import { tasks } from "./mock/tasks";
 
 export default function App() {
   const [currentCategory, setCurrentCategory] = useState(null);
-
-  const [open, setOpen] = useState(false);
 
   return (
     <div className="p-6">
@@ -35,15 +33,7 @@ export default function App() {
         </button>
       </div>
       <TodoList tasks={tasks} category={currentCategory} />
-      <Modal open={open} onClose={() => setOpen(!open)}>
-        <h1>Es un modal</h1>
-      </Modal>
-      <button
-        onClick={() => setOpen(!open)}
-        className="fixed bottom-10 right-10 bg-blue-500 text-white p-2 rounded-full w-12 h-12 text-2xl"
-      >
-        +
-      </button>
+      <CreateTask />
     </div>
   );
 }
