@@ -6,8 +6,10 @@ import { categories } from "../../core/category";
 export default function CreateTask() {
   const [open, setOpen] = useState(false);
 
+  const [listCategories, setListCategories] = useState(categories);
+
   const [selectCategory, setSelectCategory] = useState({
-    select: categories[0],
+    select: listCategories[0],
     current: null,
   });
 
@@ -27,12 +29,18 @@ export default function CreateTask() {
             <div className="mt-5">
               <Listbox
                 value={selectCategory}
-                onChange={(e) =>
+                onChange={(e) => {
                   setSelectCategory({
                     select: e,
                     current: e,
-                  })
-                }
+                  });
+
+                  const items = categories.filter(
+                    (category) => category.text !== e.text
+                  );
+
+                  setListCategories([{ ...e }, ...items]);
+                }}
               >
                 <div className="relative">
                   <Listbox.Button className="w-full flex gap-2 py-3 px-2 rounded border">
@@ -40,7 +48,7 @@ export default function CreateTask() {
                     {selectCategory.select.text}
                   </Listbox.Button>
                   <Listbox.Options className="absolute z-10 w-full bg-white mt-1 rounded shadow">
-                    {categories.map((category) => (
+                    {listCategories.map((category) => (
                       <Listbox.Option
                         key={category.text}
                         value={category}
