@@ -6,7 +6,10 @@ import { categories } from "../../core/category";
 export default function CreateTask() {
   const [open, setOpen] = useState(false);
 
-  const [selectCategory, setSelectCategory] = useState(categories[0]);
+  const [selectCategory, setSelectCategory] = useState({
+    select: categories[0],
+    current: null,
+  });
 
   return (
     <>
@@ -22,21 +25,36 @@ export default function CreateTask() {
               />
             </div>
             <div className="mt-5">
-              <Listbox value={selectCategory} onChange={setSelectCategory}>
+              <Listbox
+                value={selectCategory}
+                onChange={(e) =>
+                  setSelectCategory({
+                    select: e,
+                    current: e,
+                  })
+                }
+              >
                 <div className="relative">
                   <Listbox.Button className="w-full flex gap-2 py-3 px-2 rounded border">
-                    <img src={selectCategory.icon} /> {selectCategory.text}
+                    <img src={selectCategory.select.icon} />{" "}
+                    {selectCategory.select.text}
                   </Listbox.Button>
                   <Listbox.Options className="absolute z-10 w-full bg-white mt-1 rounded shadow">
                     {categories.map((category) => (
                       <Listbox.Option
                         key={category.text}
                         value={category}
+                        onMouseEnter={() =>
+                          setSelectCategory({
+                            ...selectCategory,
+                            current: category,
+                          })
+                        }
                         className={`${
-                          selectCategory.text === category.text
+                          selectCategory.current?.text === category.text
                             ? "bg-blue-200 text-white"
                             : "bg-white"
-                        } py-3 flex gap-2 items-center cursor-pointer px-2 hover:bg-blue-200 hover:text-white first:rounded-t last:rounded-b`}
+                        } py-3 flex gap-2 items-center cursor-pointer px-2 first:rounded-t last:rounded-b`}
                       >
                         <img src={category.icon} /> {category.text}
                       </Listbox.Option>
