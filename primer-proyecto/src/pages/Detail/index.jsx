@@ -14,11 +14,12 @@ export default function Detail() {
 
   useEffect(() => {
     getTask();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
     <>
-      <div className="max-w-md m-auto p-6">
+      <>
         {task ? (
           <>
             <h1>Tarea: {task.text}</h1>
@@ -28,7 +29,7 @@ export default function Detail() {
             <p>La tarea no fue encontrada</p>
           </>
         )}
-      </div>
+      </>
     </>
   );
 }

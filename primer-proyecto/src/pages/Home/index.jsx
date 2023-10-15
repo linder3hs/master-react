@@ -18,7 +18,7 @@ export default function Home() {
   }, []);
 
   return (
-    <div className="p-6 max-w-md m-auto">
+    <>
       <h1 className="text-2xl">Manage your time well</h1>
       <div className="my-6">
         <h2 className="font-semibold">Categories {currentCategory}</h2>
@@ -47,6 +47,6 @@ export default function Home() {
       </div>
       <TodoList tasks={tasks} category={currentCategory} />
       <CreateTask getTasks={getTasks} />
-    </div>
+    </>
   );
 }
