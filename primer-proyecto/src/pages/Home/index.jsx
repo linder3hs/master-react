@@ -36,7 +36,7 @@ export default function Home() {
       </div>
       <div className="flex justify-between">
         <h2 className="font-semibold">
-          You have {tasks.length} task for today
+          {/* You have {tasks && tasks?.length} task for today */}
         </h2>
         <button
           onClick={() => setCurrentCategory(null)}

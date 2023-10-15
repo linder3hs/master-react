@@ -11,7 +11,10 @@ const config = axios.create({
 export async function makeHttpRequest({ method, url, id, body }) {
   const requests = {
     post: async () => await config.post(url, body),
-    get: async () => await config.get(url),
+    get: async () => {
+      const endpoint = id ? `${url}/${id}` : url;
+      return await config.get(endpoint);
+    },
     put: async () => await config.put(`${url}/${id}`, body),
     delete: async () => await config.delete(`${url}/${id}`),
   };

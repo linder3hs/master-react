@@ -3,12 +3,12 @@ import { checkCircle } from "../../assets/icons";
 
 export default function TodoList({ tasks, category }) {
   const filterTask = category
-    ? tasks.filter((task) => task.category === category)
+    ? tasks?.filter((task) => task.category === category)
     : tasks;
 
   return (
     <div className="my-3 rounded-xl bg-gray-300 p-3">
-      {filterTask.length > 0 ? (
+      {filterTask && filterTask.length > 0 ? (
         filterTask.map((task) => (
           <div
             key={task.text}

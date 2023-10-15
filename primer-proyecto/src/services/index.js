@@ -8,10 +8,11 @@ export async function create(body) {
   });
 }
 
-export async function read() {
+export async function read(id = null) {
   return await makeHttpRequest({
     method: "get",
     url: "tasks",
+    id,
   });
 }
 
