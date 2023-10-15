@@ -35,7 +35,9 @@ export default function App() {
         </div>
       </div>
       <div className="flex justify-between">
-        <h2 className="font-semibold">You have 10 task for today</h2>
+        <h2 className="font-semibold">
+          You have {tasks.length} task for today
+        </h2>
         <button
           onClick={() => setCurrentCategory(null)}
           className="text-sm text-blue-500"
@@ -44,7 +46,7 @@ export default function App() {
         </button>
       </div>
       <TodoList tasks={tasks} category={currentCategory} />
-      <CreateTask />
+      <CreateTask getTasks={getTasks} />
     </div>
   );
 }
