@@ -1,5 +1,6 @@
 import { ChangeEvent } from "react";
 
+
 interface Props {
   name?: string;
   type?: string;
@@ -14,7 +15,7 @@ export default function TextField(props: Props) {
     <>
       <input
         {...props}
-        className="w-full py-4 px-3 text-sm rounded bg-[#333] border-none outline-none placeholder-white"
+        className="w-full py-4 px-3 text-sm rounded bg-netflix-gray border-none outline-none placeholder-white"
       />
     </>
   );

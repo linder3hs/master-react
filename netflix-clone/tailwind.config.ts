@@ -14,6 +14,14 @@ const config: Config = {
         "gradient-conic":
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
       },
+      colors: {
+        netflix: "#e50914",
+        "netflix-dark": "#b20710",
+        "netflix-light": "#ff1f1f",
+        "netflix-gray": "#333333",
+        "netflix-gray-light": "#757575",
+        "netflix-color-dark": "#141414",
+      },
     },
   },
   plugins: [],

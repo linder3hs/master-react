@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { TextField } from "@/common";
+import { Button, TextField } from "@/common";
 
 export default function LoginPage() {
   return (
@@ -18,6 +18,7 @@ export default function LoginPage() {
             <form action="" className="flex flex-col mt-5 gap-5">
               <TextField type="email" placeholder="Email" />
               <TextField type="password" placeholder="Password" />
+              <Button text="Iniciar sesión" type="submit" variant="primary" />
             </form>
           </div>
         </div>
