@@ -6,8 +6,24 @@ export default function useForm<T>(inputs: T) {
 
   const [errors, setErrors] = useState(inputs);
 
-  const handleValidate = () => {
-    const errors = Object.fromEntries(
+  const handleValidateOne = (value: string) => {
+    const error = !values[value as keyof typeof values]
+      ? { [value]: AuthErrors[value as keyof typeof AuthErrors] }
+      : { [value]: "" };
+
+    setErrors({
+      ...errors,
+      ...error,
+    });
+  };
+
+  const handleValidate = (value?: string) => {
+    if (value) {
+      handleValidateOne(value);
+      return;
+    }
+
+    const inputErrors = Object.fromEntries(
       Object.keys(values as {})
         .filter((value: string) => !values[value as keyof typeof values])
         .map((value: string) => [
@@ -15,7 +31,7 @@ export default function useForm<T>(inputs: T) {
           AuthErrors[value as keyof typeof AuthErrors],
         ])
     );
-    setErrors(errors as T);
+    setErrors(inputErrors as T);
   };
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {

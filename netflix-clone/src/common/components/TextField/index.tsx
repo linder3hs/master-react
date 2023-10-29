@@ -7,10 +7,11 @@ interface Props {
   type?: string;
   placeholder?: string;
   id?: string;
-  onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
   value?: string;
   theme: Theme;
   error?: string;
+  onBlur?: () => void;
+  onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
 }
 
 export default function TextField(props: Props) {
@@ -29,7 +30,7 @@ export default function TextField(props: Props) {
 
   return (
     <>
-      <input {...props} className={`${inputStyles} ${color[props.theme]} `} />
+      <input {...props} className={`${inputStyles} ${color[props.theme]}`} />
       {props.error && (
         <span className="text-netflix-color-error text-xs -mt-4">
           {props.error}
