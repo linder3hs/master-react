@@ -1,5 +1,6 @@
 import { ChangeEvent } from "react";
 import { Theme } from "@/common";
+import classNames from "classnames";
 
 interface Props {
   name?: string;
@@ -9,7 +10,6 @@ interface Props {
   onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
   value?: string;
   theme: Theme;
-  isError?: boolean;
   error?: string;
 }
 
@@ -19,15 +19,18 @@ export default function TextField(props: Props) {
     light: "bg-white text-netflix-gray placeholder-netflix-gray",
   };
 
+  const inputStyles = classNames(
+    "w-full py-4 px-3 text-sm rounded outline-none",
+    {
+      "border-b-netflix-color-error border-b border-b-2": props.error,
+      "border-none": !props.error,
+    }
+  );
+
   return (
     <>
-      <input
-        {...props}
-        className={`w-full py-4 px-3 text-sm rounded border-none outline-none ${
-          color[props.theme]
-        }`}
-      />
-      {props.isError && (
+      <input {...props} className={`${inputStyles} ${color[props.theme]} `} />
+      {props.error && (
         <span className="text-netflix-color-error text-xs -mt-4">
           {props.error}
         </span>
