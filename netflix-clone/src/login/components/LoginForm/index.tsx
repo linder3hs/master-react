@@ -1,10 +1,10 @@
 "use client";
 
-import { useState } from "react";
 import { Form, TextField, Button } from "@/common";
+import useForm from "@/common/hooks/useForm";
 
 export default function LoginForm() {
-  const [values, setValues] = useState({
+  const { values, handleInputChange } = useForm({
     email: "",
     password: "",
   });
@@ -16,12 +16,18 @@ export default function LoginForm() {
         placeholder="Email"
         name="email"
         value={values.email}
+        onChange={handleInputChange}
+        isError
+        error="Ingresa un email o un número de teléfono válido."
       />
       <TextField
         type="password"
         placeholder="Password"
         name="password"
         value={values.password}
+        onChange={handleInputChange}
+        isError
+        error="La contraseña debe tener entre 4 y 60 caracteres."
       />
       <Button text="Iniciar sesión" type="submit" variant="primary" />
     </Form>

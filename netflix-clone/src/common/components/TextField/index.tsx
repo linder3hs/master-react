@@ -9,6 +9,8 @@ interface Props {
   onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
   value?: string;
   theme: Theme;
+  isError?: boolean;
+  error?: string;
 }
 
 export default function TextField(props: Props) {
@@ -25,6 +27,11 @@ export default function TextField(props: Props) {
           color[props.theme]
         }`}
       />
+      {props.isError && (
+        <span className="text-netflix-color-error text-xs -mt-4">
+          {props.error}
+        </span>
+      )}
     </>
   );
 }

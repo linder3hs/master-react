@@ -21,6 +21,7 @@ const config: Config = {
         "netflix-gray": "#333333",
         "netflix-gray-light": "#757575",
         "netflix-color-dark": "#141414",
+        "netflix-color-error": "#e87c03",
       },
     },
   },
