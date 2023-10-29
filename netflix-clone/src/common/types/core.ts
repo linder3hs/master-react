@@ -10,3 +10,5 @@ export type Variant =
   | "dark";
 
 export type ButtonVariant = "submit" | "reset" | "button";
+
+export type Theme = "dark" | "light";
