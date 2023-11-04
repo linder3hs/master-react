@@ -15,6 +15,10 @@ interface Color {
   [key: string]: string;
 }
 
+Button.defaultProps = {
+  variant: "default",
+  textVariant: "sm",
+};
 export default function Button({
   text,
   type,
@@ -49,8 +53,3 @@ export default function Button({
     </button>
   );
 }
-
-Button.defaultProps = {
-  variant: "default",
-  textVariant: "sm",
-};

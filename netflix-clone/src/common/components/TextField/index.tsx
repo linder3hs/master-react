@@ -14,6 +14,11 @@ interface Props {
   onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
 }
 
+TextField.defaultProps = {
+  type: "text",
+  theme: "dark",
+};
+
 export default function TextField(props: Props) {
   const color = {
     dark: "bg-netflix-gray placeholder-netflix-placeholder text-white",
@@ -39,8 +44,3 @@ export default function TextField(props: Props) {
     </>
   );
 }
-
-TextField.defaultProps = {
-  type: "text",
-  theme: "dark",
-};
