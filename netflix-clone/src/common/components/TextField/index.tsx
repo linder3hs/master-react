@@ -16,7 +16,7 @@ interface Props {
 
 export default function TextField(props: Props) {
   const color = {
-    dark: "bg-netflix-gray placeholder-white text-white",
+    dark: "bg-netflix-gray placeholder-netflix-placeholder text-white",
     light: "bg-white text-netflix-gray placeholder-netflix-gray",
   };
 

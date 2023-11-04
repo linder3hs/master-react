@@ -7,6 +7,7 @@ const config: Config = {
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/login/**/*.{ts,tsx,}",
     "./src/browse/**/*.{jsx,tsx}",
+    "./src/home/**/*.{jsx,tsx}",
   ],
   theme: {
     extend: {
@@ -23,6 +24,9 @@ const config: Config = {
         "netflix-gray-light": "#757575",
         "netflix-color-dark": "#141414",
         "netflix-color-error": "#e87c03",
+        "netflix-placeholder": "#8c8c8c",
+        "netflix-color-gray": "#737373",
+        "netflix-color-gray-light": "#6d6d6e",
       },
     },
   },
