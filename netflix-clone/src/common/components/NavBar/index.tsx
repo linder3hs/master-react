@@ -29,13 +29,19 @@ export default function NavBar() {
             "flex items-center fixed z-10 gap-10 ps-5 md:ps-20 w-full transition-all duration-300",
             {
               "bg-netflix-color-dark": isScroll,
-              "bg-transparent":
-                !isScroll,
+              "bg-transparent": !isScroll,
             }
           )}
         >
           <div>
-            <Image src="/images/logo.png" alt="logo" width={140} height={100} />
+            <Link href="/">
+              <Image
+                src="/images/logo.png"
+                alt="logo"
+                width={140}
+                height={100}
+              />
+            </Link>
           </div>
           <ul className="flex gap-5">
             {items.map((item) => (

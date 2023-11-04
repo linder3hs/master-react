@@ -1,8 +1,9 @@
 "use client";
-
+import { useEffect } from "react";
 import { Form, TextField, Button } from "@/common";
 import useForm from "@/common/hooks/useForm";
 import { FormEvent } from "react";
+import { createBrowserClient } from "@supabase/ssr";
 
 export default function LoginForm() {
   const { values, handleInputChange, errors, handleValidate } = useForm({
@@ -10,9 +11,26 @@ export default function LoginForm() {
     password: "",
   });
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const supabase = createBrowserClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+  );
+
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     handleValidate();
+    const user = await supabase.auth.getSession();
+    console.log("user", user);
+    // const { error } = await supabase.auth.signUp({
+    //   ...values,
+    //   options: {
+    //     data: {
+    //       name: "Linder",
+    //       lastname: "Hassinger",
+    //     },
+    //   },
+    // });
+    // console.log("error", error);
   };
 
   return (
