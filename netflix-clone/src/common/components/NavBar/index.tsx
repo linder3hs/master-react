@@ -26,7 +26,7 @@ export default function NavBar() {
       {whileList.includes(pathname) && (
         <nav
           className={classNames(
-            "flex items-center fixed z-10 gap-10 ps-20 w-full transition-all duration-300",
+            "flex items-center fixed z-10 gap-10 ps-5 md:ps-20 w-full transition-all duration-300",
             {
               "bg-netflix-color-dark": isScroll,
               "bg-transparent":
