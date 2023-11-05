@@ -13,7 +13,9 @@ export const userSlice = createSlice({
   initialState,
   reducers: {
     setData: (state, action) => {
-      state = { ...state, ...action.payload };
+      Object.entries(action.payload).forEach(([key, value]) => {
+        state[key as keyof User] = value as string;
+      });
     },
   },
 });

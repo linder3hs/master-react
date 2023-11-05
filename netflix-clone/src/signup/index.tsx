@@ -1,4 +1,5 @@
-import { AuthContainer, Button, TextField } from "@/common";
+import { AuthContainer } from "@/common";
+import { EmailForm } from "./components";
 
 export default function SignUpPage() {
   return (
@@ -14,20 +15,7 @@ export default function SignUpPage() {
           ¿Quieres ver Netflix ya? Ingresa tu email para crear una cuenta o
           reiniciar tu membresía de Netflix.
         </p>
-        <div className="flex flex-col md:flex-row gap-3 w-full lg:w-[40%] items-center">
-          <div className="lg:grow-[10] w-full">
-            <TextField placeholder="Email" theme="transparent" size="large" />
-          </div>
-          <div className="grow">
-            <Button
-              text="Comenzar"
-              textVariant="2xl"
-              variant="primary"
-              rightIcon="/icons/arrow-right.svg"
-              size="large"
-            />
-          </div>
-        </div>
+        <EmailForm />
       </div>
     </AuthContainer>
   );
