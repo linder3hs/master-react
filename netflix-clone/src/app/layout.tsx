@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import { StoreProvider } from "@/common";
 import { NavBar } from "@/common";
 import "./globals.css";
 
@@ -18,8 +19,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${inter.className} bg-netflix-color-dark text-white`}>
-        <NavBar />
-        {children}
+        <StoreProvider>
+          <NavBar />
+          {children}
+        </StoreProvider>
       </body>
     </html>
   );

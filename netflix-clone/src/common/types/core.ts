@@ -25,3 +25,10 @@ export type Size = "small" | "medium" | "large";
 export type ButtonVariant = "submit" | "reset" | "button";
 
 export type Theme = "dark" | "light" | "transparent";
+
+export interface User {
+  name: string;
+  email: string;
+  password: string;
+  avatar: string;
+}
