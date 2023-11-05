@@ -1,4 +1,5 @@
 export { default as Avatar } from "./Avatar";
+export { default as AuthContainer } from "./AuthContainer";
 
 export { default as Button } from "./Button";
 
