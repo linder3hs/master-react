@@ -14,7 +14,7 @@ export default function LoginPage() {
             ¿Primera vez en Netflix?{" "}
           </span>
           <span>
-            <Link href={"/"}>Suscribete ahora.</Link>
+            <Link href={"/signup"}>Suscribete ahora.</Link>
           </span>
         </div>
         <p className="text-netflix-placeholder text-xs mt-3">

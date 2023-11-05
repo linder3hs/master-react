@@ -6,6 +6,7 @@ const config: Config = {
     "./src/common/components/**/*.{ts,tsx}",
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/login/**/*.{ts,tsx,}",
+    "./src/signup/**/*.{ts,tsx,}",
     "./src/browse/**/*.{jsx,tsx}",
     "./src/home/**/*.{jsx,tsx}",
   ],

@@ -20,6 +20,8 @@ export type TextVariant =
   | "3xl"
   | "4xl";
 
+export type Size = "small" | "medium" | "large";
+
 export type ButtonVariant = "submit" | "reset" | "button";
 
-export type Theme = "dark" | "light";
+export type Theme = "dark" | "light" | "transparent";
