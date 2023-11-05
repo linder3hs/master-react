@@ -7,6 +7,7 @@ const config: Config = {
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/login/**/*.{ts,tsx,}",
     "./src/signup/**/*.{ts,tsx,}",
+    "./src/regform/**/*.{ts,tsx,}",
     "./src/browse/**/*.{jsx,tsx}",
     "./src/home/**/*.{jsx,tsx}",
   ],

@@ -43,7 +43,8 @@ export default function TextField({
 
   const color = {
     dark: "bg-netflix-gray placeholder-netflix-placeholder text-white",
-    light: "bg-white text-netflix-gray placeholder-netflix-gray",
+    light:
+      "bg-white text-netflix-gray placeholder-netflix-gray border border-netflix-gray",
     transparent:
       "bg-gray-800/70 text-white placeholder-white border border-white",
   };
