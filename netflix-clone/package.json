@@ -12,6 +12,7 @@
     "@reduxjs/toolkit": "1.9.7",
     "@supabase/ssr": "0.0.8",
     "@supabase/supabase-js": "2.38.4",
+    "axios": "1.6.1",
     "classnames": "2.3.2",
     "next": "14.0.0",
     "react": "^18",

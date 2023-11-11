@@ -6,6 +6,7 @@ import type { RootState } from "@/lib/store";
 import { useSelector } from "react-redux";
 import useForm from "@/common/hooks/useForm";
 import { supabase } from "@/lib/supabase/client";
+import { create } from "@/lib/services";
 
 export default function PasswordForm() {
   const { user } = useSelector((state: RootState) => state);
@@ -17,10 +18,24 @@ export default function PasswordForm() {
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const response = await supabase.auth.signUp({
+    const { data, error } = await supabase.auth.signUp({
       ...values,
     });
-    console.log(response);
+
+    if (error) {
+      alert(error.message);
+      return;
+    }
+
+    const reponse = await create({
+      url: "auth",
+      body: {
+        access_token: data.session?.access_token,
+        refresh_token: data.session?.refresh_token,
+      },
+    });
+
+    console.log(reponse);
   };
 
   return (
