@@ -1,5 +1,4 @@
 "use client";
-import { useEffect } from "react";
 import { Form, TextField, Button } from "@/common";
 import useForm from "@/common/hooks/useForm";
 import { FormEvent } from "react";
