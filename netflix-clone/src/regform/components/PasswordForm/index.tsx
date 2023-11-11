@@ -6,10 +6,12 @@ import type { RootState } from "@/lib/store";
 import { useSelector } from "react-redux";
 import useForm from "@/common/hooks/useForm";
 import { supabase } from "@/lib/supabase/client";
-import { create } from "@/lib/services";
+import { useRouter } from "next/navigation";
 
 export default function PasswordForm() {
   const { user } = useSelector((state: RootState) => state);
+
+  const router = useRouter();
 
   const { values, handleInputChange } = useForm({
     email: user.email,
@@ -27,15 +29,7 @@ export default function PasswordForm() {
       return;
     }
 
-    const reponse = await create({
-      url: "auth",
-      body: {
-        access_token: data.session?.access_token,
-        refresh_token: data.session?.refresh_token,
-      },
-    });
-
-    console.log(reponse);
+    router.push("/login");
   };
 
   return (

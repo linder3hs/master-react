@@ -2,7 +2,8 @@
 import { Form, TextField, Button } from "@/common";
 import useForm from "@/common/hooks/useForm";
 import { FormEvent } from "react";
-import { createBrowserClient } from "@supabase/ssr";
+import { supabase } from "@/lib/supabase/client";
+import { create } from "@/lib/services";
 
 export default function LoginForm() {
   const { values, handleInputChange, errors, handleValidate } = useForm({
@@ -10,16 +11,28 @@ export default function LoginForm() {
     password: "",
   });
 
-  const supabase = createBrowserClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-  );
-
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     handleValidate();
-    const user = await supabase.auth.getSession();
-    console.log("user", user);
+    const { data, error } = await supabase.auth.signInWithPassword({
+      ...values,
+    });
+    console.log("user", data);
+
+    if (error) {
+      alert(error.message);
+      return;
+    }
+
+    const reponse = await create({
+      url: "auth",
+      body: {
+        access_token: data.session?.access_token,
+        refresh_token: data.session?.refresh_token,
+      },
+    });
+
+    console.log(reponse);
     // const { error } = await supabase.auth.signUp({
     //   ...values,
     //   options: {
