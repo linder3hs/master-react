@@ -1,12 +1,17 @@
-import { NextRequest } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import { cookies } from "next/headers";
 
-export default async function middleware(req: NextRequest) {
-  try {
-    const user = cookies()?.get("user")?.value;
-    console.log(user)
-    // si user existe tengo una sesion 
-  } catch (error) {
-    console.log("error cookies", error);
-  }
+export default async function middleware(request: NextRequest) {
+  const cookiesStore = cookies();
+  const user = cookiesStore.has("user");
+
+  const whitlist = ["login", "signup"];
+  console.log(request.nextUrl.pathname);
+  // request.nextUrl.pathname.startsWith("/about");
+
+  return NextResponse.redirect(new URL("/browse", request.url));
 }
+
+export const config = {
+  matcher: ["/", "/login", "/signup", "/signup/regform"],
+};

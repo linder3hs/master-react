@@ -2,7 +2,7 @@ import { createServerClient, type CookieOptions } from "@supabase/ssr";
 import { cookies } from "next/headers";
 
 export function getServerClient() {
-  const cookiesStore = cookies();
+  const cookieStore = cookies();
 
   return createServerClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
@@ -10,17 +10,17 @@ export function getServerClient() {
     {
       cookies: {
         get(name: string) {
-          return cookiesStore.get(name)?.value;
+          return cookieStore.get(name)?.value;
         },
         set(name: string, value: string, options: CookieOptions) {
-          cookiesStore.set({
+          cookieStore.set({
             name,
             value,
             ...options,
           });
         },
         remove(name: string, options: CookieOptions) {
-          cookiesStore.delete({ name, ...options });
+          cookieStore.delete({ name, ...options });
         },
       },
     }
