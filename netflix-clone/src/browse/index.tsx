@@ -1,7 +1,11 @@
 import { Avatar } from "@/common";
 import { ManageProfile } from "./components";
+import { UserParser } from "@/common/parser/user";
 
 export default function BrowsePage() {
+  const instance = new UserParser();
+  const user = instance.getUser();
+
   return (
     <>
       <div className="h-screen flex flex-col items-center justify-center">
@@ -11,7 +15,7 @@ export default function BrowsePage() {
         <div className="flex gap-10 flex-wrap justify-center px-20">
           <Avatar src="/images/item.png" alt="Linder" name="Linder" isHover />
         </div>
-        <ManageProfile />
+        <ManageProfile user={user} />
       </div>
     </>
   );

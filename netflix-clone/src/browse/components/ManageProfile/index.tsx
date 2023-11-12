@@ -1,15 +1,41 @@
 /* eslint-disable @next/next/no-img-element */
 "use client";
-import { Button, Modal, TextField } from "@/common";
+import { Button, Modal, Form, TextField, UserSupabase } from "@/common";
 import { useOpen, useForm } from "@/common/hooks";
+import { supabase } from "@/lib/supabase/client";
+import { FormEvent } from "react";
 
-export default function ManageProfile() {
+interface Props {
+  user: UserSupabase;
+}
+
+export default function ManageProfile({ user }: Props) {
   const { open, handleOpen } = useOpen();
 
   const { values, handleInputChange } = useForm({
     name: "",
-    user_id: "",
+    user_id: user.id,
+    avatar: "",
+    language: "es",
+    is_child: false,
   });
+
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    values.avatar = `https://api.dicebear.com/7.x/adventurer/svg?seed=${values.name}`;
+
+    const { error, data } = await supabase
+      .from("profiles")
+      .insert(values)
+      .select();
+
+    if (error) {
+      console.log(error.message);
+      return;
+    }
+
+    console.log("data", data);
+  };
 
   return (
     <>
@@ -22,7 +48,10 @@ export default function ManageProfile() {
         />
       </div>
       <Modal open={open} onClose={handleOpen} isFullWidth>
-        <form className="flex flex-col gap-10 max-w-3xl m-auto h-[100vh] items-center justify-center">
+        <Form
+          onSubmit={handleSubmit}
+          className="flex flex-col gap-10 max-w-3xl m-auto h-[100vh] items-center justify-center"
+        >
           <div className="flex flex-col gap-10 w-full">
             <h2 className="text-7xl font-semibold">Agregar perfil</h2>
             <p className="text-2xl text-gray-400">
@@ -54,7 +83,7 @@ export default function ManageProfile() {
               onClick={handleOpen}
             />
           </div>
-        </form>
+        </Form>
       </Modal>
     </>
   );

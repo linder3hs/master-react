@@ -1,3 +1,4 @@
+import { Provider } from "react-redux";
 export type Variant =
   | "primary"
   | "default"
@@ -31,4 +32,35 @@ export interface User {
   email: string;
   password: string;
   avatar: string;
+}
+
+interface AppMetaData {
+  provider: string;
+  Provider: string[];
+}
+
+interface Identities {
+  id: string;
+  user_id: string;
+  identity_data: any;
+  provider: string;
+  last_sign_in_at: string;
+  created_at: string;
+  updated_at: string;
+}
+
+export interface UserSupabase {
+  id: string;
+  aud: string;
+  role: string;
+  email: string;
+  email_confirmed_at: string;
+  phone?: string;
+  confirmed_at: string;
+  last_sign_in_at: string;
+  app_metadata: AppMetaData;
+  user_metadata: object;
+  identities: Identities[];
+  created_at: string;
+  updated_at: string;
 }
