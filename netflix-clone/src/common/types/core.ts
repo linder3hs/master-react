@@ -64,3 +64,13 @@ export interface UserSupabase {
   created_at: string;
   updated_at: string;
 }
+
+export interface ProfileSupabase {
+  id: number;
+  name: string;
+  language: string;
+  avatar: string;
+  is_child: boolean;
+  user_id: string;
+  created_at: string;
+}

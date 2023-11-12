@@ -5,9 +5,9 @@ interface Props {
   type?: ButtonVariant;
   onClick?: () => void;
   text?: string;
-  variant: Variant;
-  size: Size;
-  textVariant: TextVariant;
+  variant?: Variant;
+  size?: Size;
+  textVariant?: TextVariant;
   lefIcon?: string;
   rightIcon?: string;
 }
@@ -16,19 +16,13 @@ interface Color {
   [key: string]: string;
 }
 
-Button.defaultProps = {
-  variant: "default",
-  textVariant: "sm",
-  size: "medium",
-};
-
 export default function Button({
   text,
   type,
   onClick,
-  variant,
-  size,
-  textVariant,
+  variant = "default",
+  size = "medium",
+  textVariant = "sm",
   lefIcon,
   rightIcon,
 }: Props) {

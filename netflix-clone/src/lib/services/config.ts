@@ -1,5 +1,4 @@
 import axios from "axios";
-import { success, failed } from "./response";
 
 interface HttpRequest {
   method: "get" | "post" | "put" | "delete";
@@ -28,8 +27,8 @@ export async function makeHttpRequest({ method, url, id, body }: HttpRequest) {
 
   try {
     const { data } = await requests[method]();
-    return success(data);
+    return data;
   } catch (error) {
-    return failed(error);
+    return error;
   }
 }

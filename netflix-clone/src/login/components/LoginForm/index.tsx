@@ -4,8 +4,12 @@ import useForm from "@/common/hooks/useForm";
 import { FormEvent } from "react";
 import { supabase } from "@/lib/supabase/client";
 import { create } from "@/lib/services";
+import { showToast } from "@/common/utils/toast";
+import { useRouter } from "next/navigation";
 
 export default function LoginForm() {
+  const router = useRouter();
+
   const { values, handleInputChange, errors, handleValidate } = useForm({
     email: "",
     password: "",
@@ -17,14 +21,15 @@ export default function LoginForm() {
     const { data, error } = await supabase.auth.signInWithPassword({
       ...values,
     });
-    console.log("user", data);
-
     if (error) {
-      alert(error.message);
+      showToast({
+        title: error.message,
+        icon: "error",
+      });
       return;
     }
 
-    const reponse = await create({
+    const { ok, body } = await create({
       url: "auth",
       body: {
         access_token: data.session?.access_token,
@@ -32,17 +37,15 @@ export default function LoginForm() {
       },
     });
 
-    console.log(reponse);
-    // const { error } = await supabase.auth.signUp({
-    //   ...values,
-    //   options: {
-    //     data: {
-    //       name: "Linder",
-    //       lastname: "Hassinger",
-    //     },
-    //   },
-    // });
-    // console.log("error", error);
+    if (!ok) {
+      showToast({
+        title: body,
+        icon: "error",
+      });
+      return;
+    }
+
+    router.push("/browse");
   };
 
   return (

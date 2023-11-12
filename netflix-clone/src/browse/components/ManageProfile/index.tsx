@@ -4,6 +4,8 @@ import { Button, Modal, Form, TextField, UserSupabase } from "@/common";
 import { useOpen, useForm } from "@/common/hooks";
 import { supabase } from "@/lib/supabase/client";
 import { FormEvent } from "react";
+import { showToast } from "@/common/utils/toast";
+import { useRouter } from "next/navigation";
 
 interface Props {
   user: UserSupabase;
@@ -11,6 +13,8 @@ interface Props {
 
 export default function ManageProfile({ user }: Props) {
   const { open, handleOpen } = useOpen();
+
+  const router = useRouter();
 
   const { values, handleInputChange } = useForm({
     name: "",
@@ -24,17 +28,23 @@ export default function ManageProfile({ user }: Props) {
     e.preventDefault();
     values.avatar = `https://api.dicebear.com/7.x/adventurer/svg?seed=${values.name}`;
 
-    const { error, data } = await supabase
-      .from("profiles")
-      .insert(values)
-      .select();
+    const { error } = await supabase.from("profiles").insert(values).select();
 
     if (error) {
-      console.log(error.message);
+      showToast({
+        title: error.message,
+        icon: "error",
+      });
       return;
     }
 
-    console.log("data", data);
+    handleOpen();
+    showToast({
+      title: "Perfil creado",
+      icon: "success",
+    });
+
+    router.refresh()
   };
 
   return (
