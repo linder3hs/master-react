@@ -11,6 +11,7 @@ export default async function BrowsePage() {
   const { data: profiles, error } = await supabase
     .from("profiles")
     .select()
+    .eq("user_id", user.id)
     .returns<ProfileSupabase[]>();
 
   return (
