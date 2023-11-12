@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { Avatar } from "@/common";
+import { Avatar, Button } from "@/common";
 
 export default function BrowsePage() {
   return (
@@ -10,9 +10,13 @@ export default function BrowsePage() {
         </h1>
         <div className="flex gap-10 flex-wrap justify-center px-20">
           <Avatar src="/images/item.png" alt="Linder" name="Linder" isHover />
-          <Avatar src="/images/item.png" alt="Linder" name="Linder" isHover />
-          <Avatar src="/images/item.png" alt="Linder" name="Linder" isHover />
-          <Avatar src="/images/item.png" alt="Linder" name="Linder" isHover />
+        </div>
+        <div className="mt-10">
+          <Button
+            text="Administrar perfiles"
+            textVariant="lg"
+            variant="transparent"
+          />
         </div>
       </div>
     </>

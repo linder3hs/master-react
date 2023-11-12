@@ -1,17 +1,16 @@
 import { NextRequest, NextResponse } from "next/server";
 import { cookies } from "next/headers";
 
+const protectedRoutes = ["/", "/browse"];
+
 export default async function middleware(request: NextRequest) {
   const cookiesStore = cookies();
-  const user = cookiesStore.has("user");
 
-  const whitlist = ["login", "signup"];
-  console.log(request.nextUrl.pathname);
-  // request.nextUrl.pathname.startsWith("/about");
-
-  return NextResponse.redirect(new URL("/browse", request.url));
+  if (
+    !cookiesStore.has("user") &&
+    protectedRoutes.includes(request.nextUrl.pathname)
+  ) {
+    const absoluteURL = new URL("/login", request.nextUrl.origin);
+    return NextResponse.redirect(absoluteURL.toString());
+  }
 }
-
-export const config = {
-  matcher: ["/", "/login", "/signup", "/signup/regform"],
-};
