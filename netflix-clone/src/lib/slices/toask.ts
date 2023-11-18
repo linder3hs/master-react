@@ -20,4 +20,4 @@ const toastSlice = createSlice({
 
 export const { setId } = toastSlice.actions
 
-export default toastSlice.reducer
+export const { reducer: toastReducer } = toastSlice; 

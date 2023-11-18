@@ -33,8 +33,7 @@ export default function useForm<T>(inputs: T) {
     );
 
     setErrors(inputErrors as T);
-
-    return Object.values(inputErrors).every((value: any) => value !== "");
+    return Object.values(inputErrors).length === 0;
   };
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {

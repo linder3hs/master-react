@@ -2,8 +2,7 @@
 import { Form, TextField, Button } from "@/common";
 import useForm from "@/common/hooks/useForm";
 import { FormEvent } from "react";
-import { supabase } from "@/lib/supabase/client";
-import { create } from "@/lib/services";
+import { post } from "@/lib/services";
 import { showToast } from "@/common/utils/toast";
 import { useRouter } from "next/navigation";
 
@@ -17,38 +16,17 @@ export default function LoginForm() {
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    handleValidate();
-    const { data, error } = await supabase.auth.signInWithPassword({
-      ...values,
-    });
-    if (error) {
-      showToast({
-        title: error.message,
-        icon: "error",
-      });
-      return;
-    }
+    
+    if (!handleValidate()) return
 
-    const { ok, body } = await create({
-      url: "auth",
-      body: {
-        access_token: data.session?.access_token,
-        refresh_token: data.session?.refresh_token,
-      },
-    });
+    const { ok, body } = await post({ url: "auth", body: { ...values } });
 
     if (!ok) {
-      showToast({
-        title: body,
-        icon: "error",
-      });
+      showToast({ title: body.message, icon: "error" });
       return;
     }
 
-    showToast({
-      title: "Ingresando...",
-      icon: "success"
-    })
+    showToast({ title: "Ingresando...", icon: "success" });
     router.push("/browse");
   };
 

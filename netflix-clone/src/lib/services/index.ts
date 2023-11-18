@@ -11,11 +11,11 @@ interface IRead {
   url: string;
 }
 
-export async function create({ body, url }: IUpsert) {
+export async function post({ body, url }: IUpsert) {
   return await makeHttpRequest({ method: "post", url, body });
 }
 
-export async function read({ id, url }: IRead) {
+export async function get({ id, url }: IRead) {
   return await makeHttpRequest({ method: "get", url, id });
 }
 
