@@ -1,7 +1,7 @@
 import { cookies } from "next/headers";
 import { UserSupabase } from "@/common/types/core";
 
-export class UserParser {
+class UserParser {
   cookieStore;
 
   constructor() {
@@ -12,3 +12,5 @@ export class UserParser {
     return JSON.parse(this.cookieStore.get("user")?.value as string);
   }
 }
+
+export const user = new UserParser()

@@ -6,17 +6,38 @@ import Image from "next/image";
 import { items } from "./items";
 import classNames from "classnames";
 import { Toaster } from "sonner";
+import { getDataFromTable } from "@/lib/supabase/client";
+import { ProfileSupabase } from "@/common";
+import { showToast } from "@/common/utils/toast";
 
-export default function NavBar() {
+export default function NavBar({id}: {id: string}) {
   const pathname = usePathname();
 
-  const [isScroll, setIsScroll] = useState(false);
+  const [isScroll, setIsScroll] = useState<boolean>(false);
+
+  const [profiles, setProfiles] = useState<ProfileSupabase[]>([])
 
   const whileList = ["/", "/search"];
 
   const handleScrolling = useCallback(() => {
     setIsScroll(window.scrollY > 50);
   }, []);
+
+  const handleFetchProfiles = async () => {
+    const { data, error } = await getDataFromTable<ProfileSupabase>("profiles", "user_id", id);
+
+    if (error) {
+      showToast({ title: error.message, icon: "error" })
+      return
+    }
+
+    console.log(data)
+    setProfiles(data)
+  }
+
+  useEffect(() => {
+    handleFetchProfiles();
+  }, [])
 
   useEffect(() => {
     window.addEventListener("scroll", handleScrolling);

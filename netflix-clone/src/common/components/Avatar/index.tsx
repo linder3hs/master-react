@@ -1,5 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 import classNames from "classnames";
+import Link from "next/link";
 
 interface Props {
   src: string;
@@ -7,9 +8,11 @@ interface Props {
   name?: string;
   isHover?: boolean;
 }
+
 export default function Avatar({ src, alt, name, isHover }: Props) {
   return (
-    <div
+    <Link
+      href={"/"}
       className={classNames("mt-10 text-center", {
         group: isHover,
       })}
@@ -26,6 +29,6 @@ export default function Avatar({ src, alt, name, isHover }: Props) {
           {name}
         </p>
       )}
-    </div>
+    </Link>
   );
 }

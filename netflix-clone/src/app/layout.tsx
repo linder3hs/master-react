@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import { StoreProvider } from "@/common";
 import { NavBar } from "@/common";
 import "./globals.css";
+import { user } from "@/common/parser/user";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -18,11 +19,13 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  const { id } = user.getUser()
+
   return (
     <html lang="en">
       <body className={`${inter.className} bg-netflix-color-dark text-white`}>
         <StoreProvider>
-          <NavBar />
+          <NavBar id={id} />
           {children}
         </StoreProvider>
       </body>

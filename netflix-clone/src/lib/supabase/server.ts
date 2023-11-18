@@ -26,3 +26,9 @@ export function getServerClient() {
     }
   );
 }
+
+export const supabase = getServerClient();
+
+export async function getDataFromTable<T>(table: string, column: string, value: string) {
+  return await supabase.from(table).select().eq(column, value).returns<T[]>();
+}

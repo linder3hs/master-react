@@ -1,18 +1,16 @@
 import { Avatar, ProfileSupabase } from "@/common";
 import { ManageProfile } from "./components";
-import { UserParser } from "@/common/parser/user";
-import { getServerClient } from "@/lib/supabase/server";
+import { user } from "@/common/parser/user";
+import { getDataFromTable } from "@/lib/supabase/server";
 
 export default async function BrowsePage() {
-  const instance = new UserParser();
-  const user = instance.getUser();
+  const userData = user.getUser();
 
-  const supabase = getServerClient();
-  const { data: profiles, error } = await supabase
-    .from("profiles")
-    .select()
-    .eq("user_id", user.id)
-    .returns<ProfileSupabase[]>();
+  const { error, data: profiles } = await getDataFromTable<ProfileSupabase>(
+    "profiles",
+    "user_id",
+    userData.id
+  );
 
   return (
     <>
@@ -37,7 +35,7 @@ export default async function BrowsePage() {
                 />
               ))}
             </div>
-            <ManageProfile user={user} />
+            <ManageProfile user={userData} />
           </div>
         </>
       )}
