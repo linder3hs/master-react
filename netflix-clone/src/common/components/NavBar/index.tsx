@@ -5,6 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { items } from "./items";
 import classNames from "classnames";
+import { Toaster } from "sonner";
 
 export default function NavBar() {
   const pathname = usePathname();
@@ -54,6 +55,7 @@ export default function NavBar() {
           </ul>
         </nav>
       )}
+      <Toaster />
     </>
   );
 }

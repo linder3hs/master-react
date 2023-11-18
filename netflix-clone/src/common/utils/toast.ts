@@ -1,4 +1,6 @@
-import Swal from "sweetalert2";
+import { toast } from "sonner";
+import { setId } from "@/lib/slices/toask";
+import store from "@/lib/store";
 
 interface IToast {
   title: string;
@@ -6,20 +8,16 @@ interface IToast {
 }
 
 export function showToast({ title, icon = "success" }: IToast) {
-  const Toast = Swal.mixin({
-    toast: true,
-    position: "top-end",
-    showConfirmButton: false,
-    timer: 3000,
-    timerProgressBar: false,
-    didOpen: (toast) => {
-      toast.onmouseenter = Swal.stopTimer;
-      toast.onmouseleave = Swal.resumeTimer;
-    },
+  const { toask: toastState } = store.getState()
+   
+  if (toastState.id) {
+    toast.dismiss(toastState.id)
+  };
+
+  const toastId = toast[icon](title, {
+    position: "top-right",
+    className: `text-${icon}`,
   });
 
-  Toast.fire({
-    icon,
-    title: title,
-  });
+  store.dispatch(setId(toastId))
 }

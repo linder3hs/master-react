@@ -1,3 +1,20 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+.text-success {
+  color: #2ed8b6 !important;
+}
+
+.text-warning {
+  color: #f5a623 !important;
+}
+
+.text-info {
+  color: #00b8d9 !important;
+}
+
+.text-error {
+  color: #ff5630 !important;
+}

@@ -10,6 +10,7 @@ const config: Config = {
     "./src/regform/**/*.{ts,tsx,}",
     "./src/browse/**/*.{jsx,tsx}",
     "./src/home/**/*.{jsx,tsx}",
+    "./src/common/utils/**/*.{jsx,tsx}",
   ],
   theme: {
     extend: {

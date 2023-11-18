@@ -45,6 +45,10 @@ export default function LoginForm() {
       return;
     }
 
+    showToast({
+      title: "Ingresando...",
+      icon: "success"
+    })
     router.push("/browse");
   };
 
