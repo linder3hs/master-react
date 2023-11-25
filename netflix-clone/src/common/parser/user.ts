@@ -9,7 +9,8 @@ class UserParser {
   }
 
   getUser(): UserSupabase {
-    return JSON.parse(this.cookieStore.get("user")?.value as string);
+    const user = this.cookieStore.get("user")?.value ?? "{}";
+    return JSON.parse(user);
   }
 }
 
