@@ -6,6 +6,8 @@ import { getDataFromTable } from "@/lib/supabase/server";
 export default async function BrowsePage() {
   const userData = user.getUser();
 
+  if (!userData) return;
+
   const { error, data: profiles } = await getDataFromTable<ProfileSupabase>(
     "profiles",
     "user_id",

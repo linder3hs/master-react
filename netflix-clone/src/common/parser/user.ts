@@ -8,10 +8,13 @@ class UserParser {
     this.cookieStore = cookies();
   }
 
-  getUser(): UserSupabase {
-    const user = this.cookieStore.get("user")?.value ?? "{}";
+  getUser(): UserSupabase | undefined {
+    const user = this.cookieStore.get("user")?.value;
+
+    if (!user) return undefined;
+
     return JSON.parse(user);
   }
 }
 
-export const user = new UserParser()
+export const user = new UserParser();

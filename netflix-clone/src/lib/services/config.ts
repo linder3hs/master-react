@@ -1,5 +1,4 @@
-import axios from "axios";
-
+import axios, { type AxiosError } from "axios";
 interface HttpRequest {
   method: "get" | "post" | "put" | "delete";
   url: string;
@@ -29,6 +28,7 @@ export async function makeHttpRequest({ method, url, id, body }: HttpRequest) {
     const { data } = await requests[method]();
     return data;
   } catch (error) {
-    return error;
+    const err = error as AxiosError;
+    return err.response?.data;
   }
 }

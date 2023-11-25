@@ -4,15 +4,19 @@ import { cookies } from "next/headers";
 
 export async function POST(req: Request) {
   const body = await req.json();
+
   const supabase = getServerClient();
 
-  const { data, error } = await supabase.auth.signInWithPassword({...body})
+  const { data, error } = await supabase.auth.signInWithPassword({ ...body });
 
   if (error) {
-    return NextResponse.json({
-      ok: false,
-      body: error,
-    });
+    return NextResponse.json(
+      {
+        ok: false,
+        body: error.message,
+      },
+      { status: 500 }
+    );
   }
 
   cookies().set("user", JSON.stringify(data.user));

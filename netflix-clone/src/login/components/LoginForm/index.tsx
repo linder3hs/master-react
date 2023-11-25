@@ -16,13 +16,13 @@ export default function LoginForm() {
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    
-    if (!handleValidate()) return
+
+    if (!handleValidate()) return;
 
     const { ok, body } = await post({ url: "auth", body: { ...values } });
 
     if (!ok) {
-      showToast({ title: body.message, icon: "error" });
+      showToast({ title: body, icon: "error" });
       return;
     }
 

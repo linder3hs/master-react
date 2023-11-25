@@ -10,12 +10,12 @@ import { getDataFromTable } from "@/lib/supabase/client";
 import { ProfileSupabase } from "@/common";
 import { showToast } from "@/common/utils/toast";
 
-export default function NavBar({id}: {id: string}) {
+export default function NavBar({ id }: { id: string }) {
   const pathname = usePathname();
 
   const [isScroll, setIsScroll] = useState<boolean>(false);
 
-  const [profiles, setProfiles] = useState<ProfileSupabase[]>([])
+  const [profiles, setProfiles] = useState<ProfileSupabase[]>([]);
 
   const whileList = ["/", "/search"];
 
@@ -24,21 +24,24 @@ export default function NavBar({id}: {id: string}) {
   }, []);
 
   const handleFetchProfiles = async () => {
-    const { data, error } = await getDataFromTable<ProfileSupabase>("profiles", "user_id", id);
+    const { data, error } = await getDataFromTable<ProfileSupabase>(
+      "profiles",
+      "user_id",
+      id
+    );
 
     if (error) {
-      showToast({ title: error.message, icon: "error" })
-      return
+      showToast({ title: error.message, icon: "error" });
+      return;
     }
 
-    console.log(data)
-    setProfiles(data)
-  }
+    setProfiles(data);
+  };
 
   useEffect(() => {
     handleFetchProfiles();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   useEffect(() => {
     window.addEventListener("scroll", handleScrolling);
